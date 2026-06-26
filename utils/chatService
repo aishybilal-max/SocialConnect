@@ -1,0 +1,26 @@
+import { db } from "../config/firebase";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "firebase/firestore";
+
+export const sendMessage = async (chatId: string, text: string, senderId: string) => {
+  await addDoc(collection(db, "chats", chatId, "messages"), {
+    text,
+    senderId,
+    createdAt: serverTimestamp(),
+  });
+};
+
+export const listenMessages = (chatId: string, callback: any) => {
+  const q = query(
+    collection(db, "chats", chatId, "messages"),
+    orderBy("createdAt", "asc")
+  );
+
+  return onSnapshot(q, callback);
+};
