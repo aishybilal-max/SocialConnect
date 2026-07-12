@@ -219,9 +219,17 @@ export default function HomeScreen({ navigation }: any) {
                     <Text style={styles.postUsername}>{item.username}</Text>
                   </TouchableOpacity>
                   {isMyPost && (
-                    <TouchableOpacity onPress={() => deletePost(item)} style={styles.deleteBtn}>
-                      <Text style={styles.deleteBtnText}>Delete</Text>
-                    </TouchableOpacity>
+                    <View style={styles.postActions}>
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("EditPost", { post: item })}
+                        style={styles.editBtn}
+                      >
+                        <Text style={styles.editBtnText}>Edit</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => deletePost(item)} style={styles.deleteBtn}>
+                        <Text style={styles.deleteBtnText}>Delete</Text>
+                      </TouchableOpacity>
+                    </View>
                   )}
                 </View>
 
@@ -357,6 +365,12 @@ const styles = StyleSheet.create({
   },
   avatarText: { color: theme.colors.primary, fontWeight: "700", fontSize: 15 },
   postUsername: { color: theme.colors.text, fontWeight: "600", fontSize: 14 },
+  postActions: { flexDirection: "row", gap: 6 },
+  editBtn: {
+    paddingHorizontal: 10, paddingVertical: 4,
+    borderRadius: 6, backgroundColor: theme.colors.primarySoft,
+  },
+  editBtnText: { color: theme.colors.primary, fontSize: 12, fontWeight: "600" },
   deleteBtn: {
     paddingHorizontal: 10, paddingVertical: 4,
     borderRadius: 6, backgroundColor: theme.colors.surfaceHigh,

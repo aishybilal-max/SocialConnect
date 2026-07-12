@@ -12,7 +12,10 @@ import LoginScreen from "../screens/auth/LoginScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen";
 import HomeScreen from "../screens/home/HomeScreen";
+import EditPostScreen from "../screens/home/EditPostScreen";
 import ReelsScreen from "../screens/reels/ReelsScreen";
+import CreateReelScreen from "../screens/reels/CreateReelScreen";
+import SearchScreen from "../screens/search/SearchScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import EditProfileScreen from "../screens/profile/EditProfileScreen";
 import NotificationsScreen from "../screens/profile/NotificationsScreen";
@@ -23,7 +26,6 @@ import ChatScreen from "../screens/chat/ChatScreen";
 import ChatListScreen from "../screens/chat/ChatListScreen";
 import CreateStoryScreen from "../screens/stories/CreateStoryScreen";
 import StoryViewer from "../screens/stories/StoryViewer";
-import CreateReelScreen from "../screens/reels/CreateReelScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,9 +42,9 @@ const NavTheme = {
   },
 };
 
-// Minimal text-based tab icons — no emojis
 const TAB_ICONS: Record<string, string> = {
   Home:          "Home",
+  Search:        "Search",
   Reels:         "Reels",
   Chats:         "Msgs",
   Notifications: "Alerts",
@@ -60,10 +62,7 @@ function TabIcon({ name, focused }: { name: string; focused: boolean }) {
 }
 
 const tabSt = StyleSheet.create({
-  wrap: {
-    paddingHorizontal: 10, paddingVertical: 4,
-    borderRadius: 8,
-  },
+  wrap: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 8 },
   wrapFocused: { backgroundColor: theme.colors.primarySoft },
   text: { fontSize: 10, fontWeight: "700", color: theme.colors.textMuted, letterSpacing: 0.3 },
   textFocused: { color: theme.colors.primary },
@@ -88,6 +87,7 @@ function HomeTabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Reels" component={ReelsScreen} />
       <Tab.Screen name="Chats" component={ChatListScreen} />
       <Tab.Screen name="Notifications" component={NotificationsScreen} />
@@ -122,6 +122,7 @@ export default function AppNavigator() {
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="Main" component={HomeTabs} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="EditPost" component={EditPostScreen} />
         <Stack.Screen name="UserProfile" component={ProfileScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="FollowersList" component={FollowersListScreen} />
